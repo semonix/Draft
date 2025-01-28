@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		700F39FA2D49535300716263 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 700F39F92D49535300716263 /* KeychainSwift */; };
+		700F39FD2D4953E300716263 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 700F39FC2D4953E300716263 /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				700F39FA2D49535300716263 /* KeychainSwift in Frameworks */,
+				700F39FD2D4953E300716263 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = SomeApp;
 			packageProductDependencies = (
 				700F39F92D49535300716263 /* KeychainSwift */,
+				700F39FC2D4953E300716263 /* SnapKit-Dynamic */,
 			);
 			productName = SomeApp;
 			productReference = 700F39E02D492DB700716263 /* SomeApp.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				700F39F82D49535300716263 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				700F39FB2D4953E300716263 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 700F39E12D492DB700716263 /* Products */;
@@ -354,6 +358,14 @@
 				minimumVersion = 24.0.0;
 			};
 		};
+		700F39FB2D4953E300716263 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -361,6 +373,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 700F39F82D49535300716263 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		700F39FC2D4953E300716263 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 700F39FB2D4953E300716263 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
