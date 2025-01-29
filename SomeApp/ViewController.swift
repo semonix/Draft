@@ -4,30 +4,64 @@ import SnapKit
 class ViewController: UIViewController {
     
     let label = UILabel()
-    let keyForUDS = "counterKey"
-    let keyForKeychain = "keyForKeychain"
-    let uds = UserDefaults.standard
-    var counter = 0
-    var password = " No password. "
+    let defaults = UserDefaults.standard
+    let keyForTheme = "theme"
+    let keyForFontSize = "fontSize"
+    let oldThemeKey = "oldThemeKey"
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addSubviewsAndLayout()
         
-//        counter = uds.integer(forKey: keyForUDS)
-//        counter += 1
-//        uds.set(counter, forKey: keyForUDS)
+//        Регистрируй дефолтные настройкинастройки:
+//        - Зарегистрируй «фабричные» значения для
+//        некоего набора ключей. Например, "theme":
+//        "light", "fontSize": 14.
+        defaults.set("light", forKey: keyForTheme)
+        defaults.set(14, forKey: keyForFontSize)
         
-        if let previouslySavedPassword = readFromKeychain(forKey: keyForKeychain) {
-            // Если пароль ранее был сохранен
-            password = previouslySavedPassword
-        } else {
-            // Если пароль отсутствует
-            _ = saveToKeychain(value: "newPassword", forKey: keyForKeychain)
+        if "light" == defaults.string(forKey: keyForTheme) {
+            print("Значение \"light\" удачно записалось под ключом \(keyForTheme)")
+        }
+        if 14 == defaults.integer(forKey: keyForFontSize) {
+            print("Значение 14 удачно записалось под ключом \(keyForFontSize)")
         }
         
+//        Создай условие миграции старого ключа на
+//    новый:
+//        У тебя есть «устаревший» ключ "oldThemeKey".
+//        Если по нему что-то есть, перенеси это
+//        значение в "theme" и удали старый ключ.
+        if let oldValue = defaults.string(forKey: oldThemeKey) {
+            defaults.set(oldValue, forKey: keyForTheme)
+            defaults.removeObject(forKey: oldThemeKey)
+        }
+
+        
+//        Внеси обновление одной из настроек, допустим,
+//        "theme": "dark", чтобы показать, как её можно
+//        изменить.
+        defaults.set("dark", forKey: keyForTheme)
+        
+//        Выведи все ключи-значения через
+//        dictionaryRepresentation()
+        showAllKeysAndValues()
+        print("/*---------------------------------------------------------------------*/")
+//        Удаляй, по желанию, один из ключей и покажи
+//        результат удаления, вновь распечатай данные.
+        defaults.removeObject(forKey: keyForTheme)
+        showAllKeysAndValues()
+        
         customizeAppearance()
+    }
+    func showAllKeysAndValues() {
+        let allValues = defaults.dictionaryRepresentation()
+        allValues.forEach { key, value in
+            print("VALUE:")
+            print("\(key): \(value)")
+        }
     }
     func addSubviewsAndLayout() {
         view.addSubview(label)
@@ -44,62 +78,6 @@ class ViewController: UIViewController {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 30)
         label.adjustsFontSizeToFitWidth = true
-        
-        if counter != 0 {
-            label.text = String(counter)
-        } else {
-            label.text = password
-        }
-    }
-}
-// MARK: - KeyChain
-extension ViewController {
-    func saveToKeychain(value: String, forKey key: String) -> Bool {
-        // Преобразуем строку в Data
-        guard let valueData = value.data(using: .utf8) else {
-            return false
-        }
-        // Создаем словарь с параметрами для записи
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key,
-            kSecValueData as String: valueData
-        ]
-        
-        // Удаляем предыдущий элемент с таким же ключом (если существует)
-        SecItemDelete(query as CFDictionary)
-        
-        // Добавляем новый элемент в Keychain
-        let status = SecItemAdd(query as CFDictionary, nil)
-        
-        if status != errSecSuccess {
-            print("Ошибка сохранения в Keychain: \(status)")
-        }
-        
-        // Проверяем результат операции
-        return status == errSecSuccess
-    }
-    func readFromKeychain(forKey key: String) -> String? {
-        // Создаем словарь с параметрами для поиска
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key,
-            kSecReturnData as String: kCFBooleanTrue!,
-            kSecMatchLimit as String: kSecMatchLimitOne
-        ]
-
-        var dataTypeRef: AnyObject?
-
-        // Ищем элемент в Keychain
-        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-
-        if status == errSecSuccess {
-            if let retrievedData = dataTypeRef as? Data,
-               let value = String(data: retrievedData, encoding: .utf8) {
-                return value
-            }
-        }
-        return nil
     }
 }
 
