@@ -1,6 +1,12 @@
 import UIKit
 import SnapKit
-
+class SecondViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "vc 2"
+        view.backgroundColor = .gray
+    }
+}
 class ViewController: UIViewController {
     
     let label = UILabel()
@@ -9,11 +15,24 @@ class ViewController: UIViewController {
     let keyForFontSize = "fontSize"
     let oldThemeKey = "oldThemeKey"
     
-
-    
+//    @objc func pressAction() {
+//        let secondVC = SecondViewController()
+//        navigationController?.pushViewController(secondVC, animated: true)
+//    }
+    @objc func labelTapped() {
+        let secondVC = SecondViewController()
+        navigationController?.pushViewController(secondVC, animated: true)
+        
+//        present(secondVC, animated: true)
+        
+        print(456)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviewsAndLayout()
+        label.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(labelTapped))
+        label.addGestureRecognizer(tap)
         
 //        Регистрируй дефолтные настройкинастройки:
 //        - Зарегистрируй «фабричные» значения для
@@ -57,11 +76,11 @@ class ViewController: UIViewController {
         customizeAppearance()
     }
     func showAllKeysAndValues() {
-        let allValues = defaults.dictionaryRepresentation()
-        allValues.forEach { key, value in
-            print("VALUE:")
-            print("\(key): \(value)")
-        }
+//        let allValues = defaults.dictionaryRepresentation()
+//        allValues.forEach { key, value in
+//            print("VALUE:")
+//            print("\(key): \(value)")
+//        }
     }
     func addSubviewsAndLayout() {
         view.addSubview(label)
@@ -83,6 +102,6 @@ class ViewController: UIViewController {
 
 @available(iOS 17.0, *)
 #Preview {
-//    UINavigationController(rootViewController: ViewController())
-    ViewController()
+    UINavigationController(rootViewController: ViewController())
+//    ViewController()
 }
