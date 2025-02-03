@@ -1,45 +1,89 @@
 import UIKit
 
 class SecondViewController: UIViewController {
-    var imageView = UIImageView()
+    let label = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "vc 2"
-        view.backgroundColor = .gray
-        initImage()
-        loadPhoto()
-//        let imageURL = URL(string:         "https://www.planetware.com/photos-large/F/france-paris-eiffel-tower.jpg")!
-//        if let data = try? Data(contentsOf: imageURL) {
-//            imageView.image = UIImage(data: data)
-//        }
-    }
-    func initImage() {
-        view.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalToConstant: 300),
-            imageView.widthAnchor.constraint(equalToConstant: 300),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.borderWidth = 2
-    }
+        
+        view.backgroundColor = .white
+        addSubviews()
+        setupLayout()
+        setupAppearance()
+        setupTargets()
 
-    func loadPhoto() {
-        let queue = DispatchQueue.global(qos: .utility)
-        let imageURL = URL(string: "https://www.planetware.com/photos-large/F/france-paris-eiffel-tower.jpg")!
-        queue.async {
-            guard let data = try? Data(contentsOf: imageURL) else { return }
-            DispatchQueue.main.async {
-                self.imageView.image = UIImage(data: data)
-            }
-        }
+        //        DispatchQueue.global(qos: .utility).async {
+//            DispatchQueue.concurrentPerform(iterations: 20_000) {
+//                print("""
+//                      \($0) times
+//                      \(String(validatingCString: __dispatch_queue_get_label(nil))!)
+//                      \(Thread.current)
+//                      """)
+//            }
+//        }
+        myInactiveQueue()
     }
     deinit {
         print("SecondViewController is deinit")
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+}
+// MARK: - EXAMPLE OF GCD
+extension SecondViewController {
+    func myInactiveQueue() {
+        let inactiveQueue = DispatchQueue(label: "The Swift Dev", attributes: [.concurrent, .initiallyInactive])
+
+        inactiveQueue.async {
+            print("Done!")
+        }
+        print("Not yet started...")
+        // Активирует очередь, созданную с атрибутом .initiallyInactive. После этого очередь начинает выполнять задачи.
+        inactiveQueue.activate()
+        print("Activate!")
+        
+//        suspend()/resume() работают через счетчик приостановок (например, два suspend() требуют двух resume()). Не имеют отношения к .initiallyInactive — работает с любой очередью
+
+        // блокирует новые задачи
+        inactiveQueue.suspend()
+        
+        print("Pause!")
+        
+        // Возобновляет выполнение новых задач в очереди
+        inactiveQueue.resume()
     }
+    
+}
+// MARK: - SETUP
+extension SecondViewController {
+    func addSubviews() {
+        view.addSubview(label)
+    }
+    
+    func setupLayout() {
+        label.snp.makeConstraints { make in
+            make.height.equalTo(60)
+            make.width.equalTo(200)
+            make.center.equalToSuperview()
+        }
+    }
+    
+    func setupAppearance() {
+        label.text = "Hello"
+        label.font = .systemFont(ofSize: 37)
+        label.textAlignment = .center
+        label.layer.borderWidth = 1
+    }
+    
+    func setupTargets() {
+        
+    }
+    
+//    @objc func buttonPressed() {
+//    }
+
+}
+
+
+@available(iOS 17.0, *)
+#Preview {
+    UINavigationController(rootViewController: SecondViewController())
+//    UINavigationController(rootViewController: MyViewController())
 }
