@@ -1,7 +1,10 @@
 import UIKit
 
+class Canceled {}
+
 class SecondViewController: UIViewController {
     let label = UILabel()
+    var canceled: Canceled? = Canceled()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +23,31 @@ class SecondViewController: UIViewController {
 //                      """)
 //            }
 //        }
-        myInactiveQueue()
+        
+        
+        
+//        myInactiveQueue()
+        
+        var canceled2 = canceled
+        canceled = nil
+        
+        Task { [weak canceled] in
+            for i in 1...50 {
+                try? await Task.sleep(nanoseconds: 1 * 1_00_000_000) // задержка в 0.1 секунды
+                
+                if canceled != nil {
+                    print(i)
+                } else {
+                    print("(\(i)) canceled == nil")
+                }
+            }
+        }
+
+        // Отменяем задачу выше через 3 секунды
+        Task {
+            try? await Task.sleep(nanoseconds: 3_000_000_000)
+            canceled = nil
+        }
     }
     deinit {
         print("SecondViewController is deinit")
@@ -46,10 +73,9 @@ extension SecondViewController {
         
         print("Pause!")
         
-        // Возобновляет выполнение новых задач в очереди
+        // Возобновляет выполнение новых задач в очереди (после suspend())
         inactiveQueue.resume()
     }
-    
 }
 // MARK: - SETUP
 extension SecondViewController {
