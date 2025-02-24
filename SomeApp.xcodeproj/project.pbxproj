@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		700F39FA2D49535300716263 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 700F39F92D49535300716263 /* KeychainSwift */; };
 		700F3A002D495ABF00716263 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 700F39FF2D495ABF00716263 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +40,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				700F39FA2D49535300716263 /* KeychainSwift in Frameworks */,
 				700F3A002D495ABF00716263 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,7 +83,6 @@
 			);
 			name = SomeApp;
 			packageProductDependencies = (
-				700F39F92D49535300716263 /* KeychainSwift */,
 				700F39FF2D495ABF00716263 /* SnapKit */,
 			);
 			productName = SomeApp;
@@ -117,7 +114,6 @@
 			mainGroup = 700F39D72D492DB700716263;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				700F39F82D49535300716263 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				700F39FE2D495ABF00716263 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -350,14 +346,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		700F39F82D49535300716263 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 24.0.0;
-			};
-		};
 		700F39FE2D495ABF00716263 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -369,11 +357,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		700F39F92D49535300716263 /* KeychainSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 700F39F82D49535300716263 /* XCRemoteSwiftPackageReference "keychain-swift" */;
-			productName = KeychainSwift;
-		};
 		700F39FF2D495ABF00716263 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 700F39FE2D495ABF00716263 /* XCRemoteSwiftPackageReference "SnapKit" */;
