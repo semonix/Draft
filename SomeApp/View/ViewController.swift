@@ -42,6 +42,7 @@ class ViewController: UITableViewController {
 //        let firstNames = ["Александр", "Мария", "Иван", "Екатерина", "Дмитрий", "Анна", "Сергей", "Ольга", "Никита", "Елена"]
 //        let lastNames = ["Смирнов", "Иванова", "Кузнецов", "Петрова", "Соколов", "Морозова", "Попов", "Волкова", "Новиков", "Лебедева"]
 //        let domains = ["mail.ru", "gmail.com", "yandex.ru", "outlook.com", "icloud.com"]
+        /// Код для использования c файлом NetworkService+Error
         service.fetchData(url: url) { (result: Result<GetRequest, NetworkError>) in
             switch result {
             case .success(let success):
