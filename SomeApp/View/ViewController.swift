@@ -52,8 +52,6 @@ class ViewController: UITableViewController {
             case .failure(let failure):
                 DispatchQueue.main.async {
                     switch failure {
-                    case .unknown(let description):
-                        self.showError(description: description)
                     case .badData:
                         self.showError(description: "Ваши данные плохие")
                     case .badResponse:
@@ -61,20 +59,17 @@ class ViewController: UITableViewController {
                     case .badRequest:
                         self.showError(description: "С запросом точно всё ок?")
                     case .badDecode:
-                        self.showError(description: "Не удалось декодировать...")
+                        self.showError(description: "Не удалось декодировать")
+                    case .unknown(let description):
+                        self.showError(description: description)
+//                    case .badEncode:
+//                        self.showError(description: "Не удалось отправить...")
                     }
                 }
             }
         }
     }
-    // MARK: - SHOW ERROR
-    func showError(description: String) {
-        //
-    }
-    // MARK: - ???
-    func setupNavigationBarButton() {
-        //
-    }
+
     // MARK: - TABLE VIEW
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         people.count
@@ -83,17 +78,56 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         var content = cell.defaultContentConfiguration()
-        let firstName = people[indexPath.row].firstName
-        let lastName = people[indexPath.row].firstName
-        content.text = firstName + " " + lastName
+        
+        content.text = people[indexPath.row].firstName
         cell.contentConfiguration = content
         
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
     }
-    
-
+    func setupNavigationBarButton() {
+        let button = UIBarButtonItem(title: "Добавить человека",
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(buttonTapped)
+        )
+        navigationItem.rightBarButtonItem = button
+    }
+    @objc func buttonTapped() {
+        print("Кнопка нажата")
+    }
+}
+// MARK: - SHOW ERROR
+private extension ViewController {
+    func showError(description: String? = nil) {
+        let alert = UIAlertController(title: "Произошла ошибка", message: description, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Хорошо", style: .default))
+        present(alert, animated: true)
+    }
+}
+// MARK: - SETUP PERSON
+private extension ViewController {
+    func showCustomAlert() {
+        /// Создание UIAlertController
+        let alert = UIAlertController(title: "Введите данные", message: nil, preferredStyle: .alert)
+        /// Добавление первого текстового поля
+        alert.addTextField { textField in
+            textField.placeholder = "Введите имя"
+        }
+        /// Добавление кнопки действия
+        let submitAction = UIAlertAction(title: "Отправить post request", style: .default) { [unowned alert] _ in
+            /// Получение значений из текстовых полей
+            let firstValue = alert.textFields![0].text
+            self.addPerson(name: firstValue ?? "")
+        }
+        /// Добавление действия в alert
+        alert.addAction(submitAction)
+    }
+    func addPerson(name: String) {
+        print("Функция недописана")
+    }
 }
 
 @available(iOS 17.0, *)
