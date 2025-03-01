@@ -21,6 +21,7 @@ final class NetworkService {
         configuration.waitsForConnectivity = true
         configuration.timeoutIntervalForRequest = 60 // The default value is 60.
         configuration.timeoutIntervalForResource = 250
+        configuration.timeoutIntervalForResource = 5
         return URLSession(configuration: configuration)
     }
     init() {
@@ -57,6 +58,8 @@ final class NetworkService {
                 }
             case 400:
                 completion(.failure(.badRequest))
+            case 404:
+                completion(.failure(.unknown("Страница не найдена :( ")))
             default:
                 completion(.failure(.unknown("Дефолтная ошибка, что поделать...")))
             }
