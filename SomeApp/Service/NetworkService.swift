@@ -1,4 +1,4 @@
-//import Foundation
+//import UIKit
 //
 //final class NetworkService {
 //    
@@ -30,4 +30,9 @@
 //            }
 //        }.resume()
 //    }
+//}
+//@available(iOS 17.0, *)
+//#Preview {
+//    UINavigationController(rootViewController: ViewController())
+//    //    ViewController()
 //}

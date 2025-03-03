@@ -1,4 +1,4 @@
-//import Foundation
+//import UIKit
 //
 //enum NetworkError: Error {
 //    case badData
@@ -67,4 +67,10 @@
 //            }
 //        }.resume()
 //    }
+//}
+//
+//@available(iOS 17.0, *)
+//#Preview {
+//    UINavigationController(rootViewController: ViewController())
+//    //    ViewController()
 //}

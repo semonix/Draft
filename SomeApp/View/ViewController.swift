@@ -1,16 +1,16 @@
 import UIKit
 
-struct GetRequest: Codable {
+struct GetRequest: Decodable {
     let data: [Data]
 }
-struct Data: Codable {
+struct Data: Decodable {
     let id: Int
     let email: String
     let firstName: String
     let lastName: String
 }
 struct Person: Decodable {
-    let id: Int
+    let id: String
     let name: String
     let createdAt: String
 }
@@ -27,7 +27,7 @@ class ViewController: UITableViewController {
         downloadData()
     }
     func downloadData() {
-//        /// Код для использования c файлом NetworkService
+          /// Код для использования c файлом NetworkService
 //        service.fetchData(url: url) { (result: Result<GetRequest, Error>) in
 //            switch result {
 //            case .success(let success):
@@ -42,8 +42,35 @@ class ViewController: UITableViewController {
 //        let firstNames = ["Александр", "Мария", "Иван", "Екатерина", "Дмитрий", "Анна", "Сергей", "Ольга", "Никита", "Елена"]
 //        let lastNames = ["Смирнов", "Иванова", "Кузнецов", "Петрова", "Соколов", "Морозова", "Попов", "Волкова", "Новиков", "Лебедева"]
 //        let domains = ["mail.ru", "gmail.com", "yandex.ru", "outlook.com", "icloud.com"]
+        
         /// Код для использования c файлом NetworkService+Error
-        service.fetchData(url: url) { (result: Result<GetRequest, NetworkError>) in
+//        service.fetchData(url: url) { (result: Result<GetRequest, NetworkError>) in
+//            switch result {
+//            case .success(let success):
+//                self.people = success.data
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            case .failure(let failure):
+//                DispatchQueue.main.async {
+//                    switch failure {
+//                    case .badData:
+//                        self.showError(description: "Ваши данные плохие")
+//                    case .badResponse:
+//                        self.showError(description: "Ответ плох...")
+//                    case .badRequest:
+//                        self.showError(description: "С запросом точно всё ок?")
+//                    case .badDecode:
+//                        self.showError(description: "Не удалось декодировать")
+//                    case .unknown(let description):
+//                        self.showError(description: description)
+//                    }
+//                }
+//            }
+//        }
+        
+        /// Код для использования c файлом NetworkService+Method
+        service.fetchData(url: url, httpMethod: .get) { (result: Result<GetRequest, NetworkError>) in
             switch result {
             case .success(let success):
                 self.people = success.data
@@ -63,8 +90,8 @@ class ViewController: UITableViewController {
                         self.showError(description: "Не удалось декодировать")
                     case .unknown(let description):
                         self.showError(description: description)
-//                    case .badEncode:
-//                        self.showError(description: "Не удалось отправить...")
+                    case .badEncode:
+                        self.showError(description: "Не удалось отправить...")
                     }
                 }
             }
@@ -89,7 +116,7 @@ class ViewController: UITableViewController {
         //
     }
     func setupNavigationBarButton() {
-        let button = UIBarButtonItem(title: "Добавить человека",
+        let button = UIBarButtonItem(title: "Добавить человека!",
                                      style: .plain,
                                      target: self,
                                      action: #selector(buttonTapped)
@@ -98,6 +125,7 @@ class ViewController: UITableViewController {
     }
     @objc func buttonTapped() {
         print("Кнопка нажата")
+        showCustomAlert()
     }
 }
 // MARK: - SHOW ERROR
@@ -123,11 +151,34 @@ private extension ViewController {
             let firstValue = alert.textFields![0].text
             self.addPerson(name: firstValue ?? "")
         }
-        /// Добавление действия в alert
+        /// Добавление действия в алерт
         alert.addAction(submitAction)
+        
+        /// Отображение алерта
+        present(alert, animated: true)
     }
     func addPerson(name: String) {
-        print("Функция недописана")
+        service.fetchData(
+            url: url,
+            httpMethod: .post,
+            body: ["name" : name]) { (result: Result<Person, NetworkError>) in
+                switch result {
+                case .success(let success):
+                    DispatchQueue.main.async {
+                        self.showNewPerson(from: success)
+                    }
+                case .failure(let failure):
+                    print(failure)
+                }
+            }
+    }
+    func showNewPerson(from person: Person) {
+        let alert = UIAlertController(
+            title: "Ваше имя: \(person.name)",
+            message: "Создано: \(person.createdAt)",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+        present(alert, animated: true)
     }
 }
 
