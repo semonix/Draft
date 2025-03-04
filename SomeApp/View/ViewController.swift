@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 struct GetRequest: Decodable {
     let data: [Data]
@@ -15,7 +16,7 @@ struct Person: Decodable {
     let createdAt: String
 }
 class ViewController: UITableViewController {
-    private let service = NetworkService()
+//    private let service = NetworkService()
     private let url = URL(string: "https://reqres.in/api/users")!
     var people: [Data] = []
     
@@ -70,30 +71,47 @@ class ViewController: UITableViewController {
 //        }
         
         /// Код для использования c файлом NetworkService+Method
-        service.fetchData(url: url, httpMethod: .get) { (result: Result<GetRequest, NetworkError>) in
-            switch result {
+//        service.fetchData(url: url, httpMethod: .get) { (result: Result<GetRequest, NetworkError>) in
+//            switch result {
+//            case .success(let success):
+//                self.people = success.data
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            case .failure(let failure):
+//                DispatchQueue.main.async {
+//                    switch failure {
+//                    case .badData:
+//                        self.showError(description: "Ваши данные плохие")
+//                    case .badResponse:
+//                        self.showError(description: "Ответ плох...")
+//                    case .badRequest:
+//                        self.showError(description: "С запросом точно всё ок?")
+//                    case .badDecode:
+//                        self.showError(description: "Не удалось декодировать")
+//                    case .unknown(let description):
+//                        self.showError(description: description)
+//                    case .badEncode:
+//                        self.showError(description: "Не удалось отправить...")
+//                    }
+//                }
+//            }
+//        }
+        /// Код для использования c Alamofire
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        AF.request(url, method: .get)
+        .validate()
+        .responseDecodable(of: GetRequest.self, queue: DispatchQueue.global(), decoder: decoder) { response in
+            switch response.result {
             case .success(let success):
                 self.people = success.data
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             case .failure(let failure):
-                DispatchQueue.main.async {
-                    switch failure {
-                    case .badData:
-                        self.showError(description: "Ваши данные плохие")
-                    case .badResponse:
-                        self.showError(description: "Ответ плох...")
-                    case .badRequest:
-                        self.showError(description: "С запросом точно всё ок?")
-                    case .badDecode:
-                        self.showError(description: "Не удалось декодировать")
-                    case .unknown(let description):
-                        self.showError(description: description)
-                    case .badEncode:
-                        self.showError(description: "Не удалось отправить...")
-                    }
-                }
+                print(failure.localizedDescription)
             }
         }
     }
@@ -158,17 +176,31 @@ private extension ViewController {
         present(alert, animated: true)
     }
     func addPerson(name: String) {
-        service.fetchData(
-            url: url,
-            httpMethod: .post,
-            body: ["name" : name]) { (result: Result<Person, NetworkError>) in
-                switch result {
+//        service.fetchData(
+//            url: url,
+//            httpMethod: .post,
+//            body: ["name" : name]
+//        ) { (result: Result<Person, NetworkError>) in
+//            switch result {
+//            case .success(let success):
+//                DispatchQueue.main.async {
+//                    self.showNewPerson(from: success)
+//                }
+//            case .failure(let failure):
+//                print(failure)
+//            }
+//        }
+        
+        let param: Parameters = ["name": name]
+        
+        AF.request(url, method: .post, parameters: param)
+            .validate()
+            .responseDecodable(of: Person.self) { response in
+                switch response.result {
                 case .success(let success):
-                    DispatchQueue.main.async {
-                        self.showNewPerson(from: success)
-                    }
+                    self.showNewPerson(from: success)
                 case .failure(let failure):
-                    print(failure)
+                    print(failure.localizedDescription)
                 }
             }
     }
