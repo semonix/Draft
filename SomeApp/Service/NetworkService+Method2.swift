@@ -25,6 +25,7 @@ protocol NetworkProtocol {
 final class NetworkService {
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
+    static let shared = NetworkService()
     
     private var session: URLSession {
         let configuration = URLSessionConfiguration.default
@@ -34,7 +35,7 @@ final class NetworkService {
         configuration.timeoutIntervalForResource = 250
         return URLSession(configuration: configuration)
     }
-    init() {
+    private init() {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
     /// Этот метод получает данные из сети и декодирует их в указанный тип модели
