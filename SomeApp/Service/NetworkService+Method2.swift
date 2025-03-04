@@ -72,7 +72,7 @@ final class NetworkService {
                 return
             }
             /// для просмотра body of response
-            let responseString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
+//            let responseString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
             
             switch response.statusCode {
             case 200...299:
