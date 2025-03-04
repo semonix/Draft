@@ -36,7 +36,7 @@
 //        decoder.keyDecodingStrategy = .convertFromSnakeCase
 //    }
 //    /// Этот метод получает данные из сети и декодирует их в указанный тип модели
-//    func fetchData<T: Codable>(
+//    func fetchData<T: Decodable>(
 //        url: URL,
 //        httpMethod: HTTPMethod,
 //        body: Encodable? = nil,
