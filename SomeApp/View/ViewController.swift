@@ -30,12 +30,11 @@ class ViewController: UIViewController, Coordinating {
     }
 }
 
-//@available(iOS 17.0, *)
-//#Preview {
-//    UINavigationController(rootViewController: ViewController())
-    
-//    let vc = ViewController()
-//    let navC = vc.coordinator?.navigationController
-//    
-//    UINavigationController(rootViewController: navC!)
-//}
+@available(iOS 17.0, *)
+#Preview {
+    let navC = UINavigationController()
+    let coordinator = MainCoordinator()
+    coordinator.navigationController = navC
+    coordinator.start()
+    return navC
+}
