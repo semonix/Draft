@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController, Coordinating {
+class ViewController: UIViewController {
     
     var coordinator: Coordinator?
     let button = UIButton()
