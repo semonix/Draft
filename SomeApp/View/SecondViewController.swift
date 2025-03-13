@@ -1,6 +1,6 @@
 import UIKit
 
-class SecondViewController: UIViewController, Coordinating {
+class SecondViewController: UIViewController {
     
     var coordinator: Coordinator?
 

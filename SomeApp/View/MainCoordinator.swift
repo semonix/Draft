@@ -7,9 +7,6 @@ protocol Coordinator {
     func eventOccured(with type: Event)
     func start()
 }
-protocol Coordinating {
-    var coordinator: Coordinator? { get set }
-}
 class MainCoordinator: Coordinator {
     
     var navigationController: UINavigationController?
