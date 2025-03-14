@@ -11,14 +11,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         let navC = UINavigationController()
-//        let coordinator = MainCoordinator()
-//        coordinator.navigationController = navC
+        let VC = EnterPhoneViewController()
+        navC.setViewControllers([VC], animated: true)
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window!.makeKeyAndVisible()
         window!.rootViewController = navC
-//        coordinator.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

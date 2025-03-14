@@ -1,12 +1,18 @@
-import UIKit
-import SnapKit
+//
+//  EnterNameViewController.swift
+//  SomeApp
+//
+//  Created by Даниял on 14.03.2025.
+//
 
-class ConformPhoneViewController: UIViewController {
+import UIKit
+
+class EnterNameViewController: UIViewController {
 
     private var textField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Enter code"
+        textField.placeholder = "Enter Name"
         return textField
     }()
     private lazy var nextButton: UIButton = {
@@ -20,16 +26,12 @@ class ConformPhoneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
-        
     }
     func setup(userData: UserData) {
-        
         self.userData = userData
-        
     }
     private func addSubviews() {
-        
-        title = "ConformPhone"
+        title = "Enter Name"
         view.backgroundColor = .white
         
         let stackView = UIStackView(arrangedSubviews: [textField, nextButton])
@@ -43,8 +45,9 @@ class ConformPhoneViewController: UIViewController {
         }
     }
     @objc func didPressNextButton() {
-        let enterPasswordViewController = EnterPasswordViewController()
-        enterPasswordViewController.setup(userData: userData)
-        navigationController?.pushViewController(enterPasswordViewController, animated: true)
+        userData.name = textField.text
+        let enterBirthdayViewController = EnterBirthdayViewController()
+        enterBirthdayViewController.setup(userData: userData)
+        navigationController?.pushViewController(enterBirthdayViewController, animated: true)
     }
 }

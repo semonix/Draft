@@ -9,10 +9,10 @@ class EnterPhoneViewController: UIViewController {
         textField.placeholder = "Enter phone"
         return textField
     }()
-    private let nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         let nextButton = UIButton(type: .system)
         nextButton.setTitle("Next", for: .normal)
-        nextButton.addTarget(EnterPhoneViewController.self, action: #selector(didPressNextButton), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(didPressNextButton), for: .touchUpInside)
         return nextButton
     }()
     override func viewDidLoad() {
@@ -33,9 +33,18 @@ class EnterPhoneViewController: UIViewController {
             make.height.equalTo(120)
             make.center.equalToSuperview()
         }
+        
     }
     @objc func didPressNextButton() {
         
         let userData = UserData(phoneNumber: textField.text, password: nil, name: nil, birthday: nil)
+        let conformPhoneViewController = ConformPhoneViewController()
+        conformPhoneViewController.setup(userData: userData)
+        navigationController?.pushViewController(conformPhoneViewController, animated: true)
+        
     }
+}
+@available(iOS 17.0, *)
+#Preview {
+    UINavigationController(rootViewController: EnterPhoneViewController())
 }
