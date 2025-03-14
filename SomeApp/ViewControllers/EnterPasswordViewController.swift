@@ -9,10 +9,10 @@ class EnterPasswordViewController: UIViewController {
         textField.placeholder = "Enter password"
         return textField
     }()
-    private let nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         let nextButton = UIButton(type: .system)
         nextButton.setTitle("Next", for: .normal)
-        nextButton.addTarget(EnterPasswordViewController.self, action: #selector(didPressNextButton), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(didPressNextButton), for: .touchUpInside)
         return nextButton
     }()
     private var userData: UserData!
@@ -39,6 +39,9 @@ class EnterPasswordViewController: UIViewController {
         }
     }
     @objc func didPressNextButton() {
-        
+        userData.password = textField.text
+        let enterNameViewController = EnterNameViewController()
+        enterNameViewController.setup(userData: userData)
+        navigationController?.pushViewController(enterNameViewController, animated: true)
     }
 }

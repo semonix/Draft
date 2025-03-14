@@ -15,6 +15,8 @@
 		7033081C2D84A33800500880 /* EnterPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308142D84A33800500880 /* EnterPhoneViewController.swift */; };
 		7033081D2D84A33800500880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7033080B2D84A33800500880 /* Assets.xcassets */; };
 		7033081F2D84A33800500880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7033080E2D84A33800500880 /* LaunchScreen.storyboard */; };
+		703308262D84A63A00500880 /* EnterNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308252D84A63A00500880 /* EnterNameViewController.swift */; };
+		703308282D84A74D00500880 /* EnterBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308272D84A74D00500880 /* EnterBirthdayViewController.swift */; };
 		706395BD2D83587900A98193 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 706395BC2D83587900A98193 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,8 @@
 		703308122D84A33800500880 /* ConformPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConformPhoneViewController.swift; sourceTree = "<group>"; };
 		703308132D84A33800500880 /* EnterPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPasswordViewController.swift; sourceTree = "<group>"; };
 		703308142D84A33800500880 /* EnterPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneViewController.swift; sourceTree = "<group>"; };
+		703308252D84A63A00500880 /* EnterNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNameViewController.swift; sourceTree = "<group>"; };
+		703308272D84A74D00500880 /* EnterBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterBirthdayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,9 +79,11 @@
 		703308152D84A33800500880 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				703308142D84A33800500880 /* EnterPhoneViewController.swift */,
 				703308122D84A33800500880 /* ConformPhoneViewController.swift */,
 				703308132D84A33800500880 /* EnterPasswordViewController.swift */,
-				703308142D84A33800500880 /* EnterPhoneViewController.swift */,
+				703308252D84A63A00500880 /* EnterNameViewController.swift */,
+				703308272D84A74D00500880 /* EnterBirthdayViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -85,10 +91,34 @@
 		703308162D84A33800500880 /* SomeApp */ = {
 			isa = PBXGroup;
 			children = (
+				703308222D84A40B00500880 /* Model */,
+				703308212D84A40200500880 /* AppDelegate */,
+				703308202D84A3EE00500880 /* Resourses */,
 				703308112D84A33800500880 /* others */,
 				703308152D84A33800500880 /* ViewControllers */,
 			);
 			path = SomeApp;
+			sourceTree = "<group>";
+		};
+		703308202D84A3EE00500880 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		703308212D84A40200500880 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		703308222D84A40B00500880 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,9 +201,11 @@
 				703308172D84A33800500880 /* AppDelegate.swift in Sources */,
 				703308182D84A33800500880 /* SceneDelegate.swift in Sources */,
 				703308192D84A33800500880 /* UserData.swift in Sources */,
+				703308262D84A63A00500880 /* EnterNameViewController.swift in Sources */,
 				7033081A2D84A33800500880 /* ConformPhoneViewController.swift in Sources */,
 				7033081B2D84A33800500880 /* EnterPasswordViewController.swift in Sources */,
 				7033081C2D84A33800500880 /* EnterPhoneViewController.swift in Sources */,
+				703308282D84A74D00500880 /* EnterBirthdayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
