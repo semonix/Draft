@@ -7,33 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		703308172D84A33800500880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033080A2D84A33800500880 /* AppDelegate.swift */; };
+		703308182D84A33800500880 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033080F2D84A33800500880 /* SceneDelegate.swift */; };
+		703308192D84A33800500880 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308102D84A33800500880 /* UserData.swift */; };
+		7033081A2D84A33800500880 /* ConformPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308122D84A33800500880 /* ConformPhoneViewController.swift */; };
+		7033081B2D84A33800500880 /* EnterPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308132D84A33800500880 /* EnterPasswordViewController.swift */; };
+		7033081C2D84A33800500880 /* EnterPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308142D84A33800500880 /* EnterPhoneViewController.swift */; };
+		7033081D2D84A33800500880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7033080B2D84A33800500880 /* Assets.xcassets */; };
+		7033081F2D84A33800500880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7033080E2D84A33800500880 /* LaunchScreen.storyboard */; };
 		706395BD2D83587900A98193 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 706395BC2D83587900A98193 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		700F39E02D492DB700716263 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7033080A2D84A33800500880 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7033080B2D84A33800500880 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7033080C2D84A33800500880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7033080D2D84A33800500880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7033080F2D84A33800500880 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		703308102D84A33800500880 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		703308122D84A33800500880 /* ConformPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConformPhoneViewController.swift; sourceTree = "<group>"; };
+		703308132D84A33800500880 /* EnterPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPasswordViewController.swift; sourceTree = "<group>"; };
+		703308142D84A33800500880 /* EnterPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		700F39F22D492DB900716263 /* Exceptions for "SomeApp" folder in "SomeApp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				others/Info.plist,
-			);
-			target = 700F39DF2D492DB700716263 /* SomeApp */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		700F39E22D492DB700716263 /* SomeApp */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				700F39F22D492DB900716263 /* Exceptions for "SomeApp" folder in "SomeApp" target */,
-			);
-			path = SomeApp;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		700F39DD2D492DB700716263 /* Frameworks */ = {
@@ -50,7 +46,7 @@
 		700F39D72D492DB700716263 = {
 			isa = PBXGroup;
 			children = (
-				700F39E22D492DB700716263 /* SomeApp */,
+				703308162D84A33800500880 /* SomeApp */,
 				700F39E12D492DB700716263 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +57,38 @@
 				700F39E02D492DB700716263 /* SomeApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		703308112D84A33800500880 /* others */ = {
+			isa = PBXGroup;
+			children = (
+				7033080A2D84A33800500880 /* AppDelegate.swift */,
+				7033080B2D84A33800500880 /* Assets.xcassets */,
+				7033080C2D84A33800500880 /* Info.plist */,
+				7033080E2D84A33800500880 /* LaunchScreen.storyboard */,
+				7033080F2D84A33800500880 /* SceneDelegate.swift */,
+				703308102D84A33800500880 /* UserData.swift */,
+			);
+			path = others;
+			sourceTree = "<group>";
+		};
+		703308152D84A33800500880 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				703308122D84A33800500880 /* ConformPhoneViewController.swift */,
+				703308132D84A33800500880 /* EnterPasswordViewController.swift */,
+				703308142D84A33800500880 /* EnterPhoneViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		703308162D84A33800500880 /* SomeApp */ = {
+			isa = PBXGroup;
+			children = (
+				703308112D84A33800500880 /* others */,
+				703308152D84A33800500880 /* ViewControllers */,
+			);
+			path = SomeApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +105,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				700F39E22D492DB700716263 /* SomeApp */,
 			);
 			name = SomeApp;
 			packageProductDependencies = (
@@ -131,6 +156,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7033081D2D84A33800500880 /* Assets.xcassets in Resources */,
+				7033081F2D84A33800500880 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,10 +168,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				703308172D84A33800500880 /* AppDelegate.swift in Sources */,
+				703308182D84A33800500880 /* SceneDelegate.swift in Sources */,
+				703308192D84A33800500880 /* UserData.swift in Sources */,
+				7033081A2D84A33800500880 /* ConformPhoneViewController.swift in Sources */,
+				7033081B2D84A33800500880 /* EnterPasswordViewController.swift in Sources */,
+				7033081C2D84A33800500880 /* EnterPhoneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7033080E2D84A33800500880 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7033080D2D84A33800500880 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		700F39F42D492DB900716263 /* Debug */ = {
