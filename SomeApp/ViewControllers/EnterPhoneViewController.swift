@@ -1,7 +1,9 @@
 import UIKit
 import SnapKit
 
-class EnterPhoneViewController: UIViewController {
+class EnterPhoneViewController: UIViewController, FlowController {
+    
+    var completionHandler: ((String?) -> ())?
 
     private var textField: UITextField = {
         let textField = UITextField()
@@ -33,14 +35,9 @@ class EnterPhoneViewController: UIViewController {
             make.height.equalTo(120)
             make.center.equalToSuperview()
         }
-        
     }
     @objc func didPressNextButton() {
-        
-        let userData = UserData(phoneNumber: textField.text, password: nil, name: nil, birthday: nil)
-        let conformPhoneViewController = ConformPhoneViewController()
-        conformPhoneViewController.setup(userData: userData)
-        navigationController?.pushViewController(conformPhoneViewController, animated: true)
+        completionHandler?(textField.text)
         
     }
 }

@@ -1,13 +1,8 @@
-//
-//  EnterNameViewController.swift
-//  SomeApp
-//
-//  Created by Даниял on 14.03.2025.
-//
-
 import UIKit
 
-class EnterNameViewController: UIViewController {
+class EnterNameViewController: UIViewController, FlowController {
+    
+    var completionHandler: ((String?) -> ())?
 
     private var textField: UITextField = {
         let textField = UITextField()
@@ -45,9 +40,6 @@ class EnterNameViewController: UIViewController {
         }
     }
     @objc func didPressNextButton() {
-        userData.name = textField.text
-        let enterBirthdayViewController = EnterBirthdayViewController()
-        enterBirthdayViewController.setup(userData: userData)
-        navigationController?.pushViewController(enterBirthdayViewController, animated: true)
+        completionHandler?(textField.text)
     }
 }

@@ -3,6 +3,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let registrationCoordinator = CoordinatorFactory().createRegistrationCoordinator(navigationController: UINavigationController())
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -10,14 +11,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        let navC = UINavigationController()
-        let VC = EnterPhoneViewController()
-        navC.setViewControllers([VC], animated: true)
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window!.makeKeyAndVisible()
-        window!.rootViewController = navC
+        window!.rootViewController = registrationCoordinator.navigationController
+        
+        registrationCoordinator.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
