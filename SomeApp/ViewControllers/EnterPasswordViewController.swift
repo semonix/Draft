@@ -1,7 +1,8 @@
 import UIKit
-import SnapKit
 
-class EnterPasswordViewController: UIViewController {
+class EnterPasswordViewController: UIViewController, FlowController {
+    
+    var completionHandler: ((String?) -> ())?
 
     private var textField: UITextField = {
         let textField = UITextField()
@@ -39,9 +40,6 @@ class EnterPasswordViewController: UIViewController {
         }
     }
     @objc func didPressNextButton() {
-        userData.password = textField.text
-        let enterNameViewController = EnterNameViewController()
-        enterNameViewController.setup(userData: userData)
-        navigationController?.pushViewController(enterNameViewController, animated: true)
+        completionHandler?(textField.text)
     }
 }

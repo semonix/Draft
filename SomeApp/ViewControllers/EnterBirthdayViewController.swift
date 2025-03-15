@@ -1,13 +1,8 @@
-//
-//  EnterBirthViewController.swift
-//  SomeApp
-//
-//  Created by Даниял on 14.03.2025.
-//
-
 import UIKit
 
-class EnterBirthdayViewController: UIViewController {
+class EnterBirthdayViewController: UIViewController, FlowController {
+    
+    var completionHandler: ((Date) -> ())?
 
     private var textField: UITextField = {
         let textField = UITextField()
@@ -45,10 +40,6 @@ class EnterBirthdayViewController: UIViewController {
         }
     }
     @objc func didPressNextButton() {
-        userData.birthday = textField.text
-        print(userData ?? "userData is empty")
-//        let enterNameViewController = EnterNameViewController()
-//        enterNameViewController.setup(userData: userData)
-//        navigationController?.pushViewController(enterNameViewController, animated: true)
+        completionHandler?(Date())
     }
 }
