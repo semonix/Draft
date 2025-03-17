@@ -7,6 +7,4 @@ class CoordinatorFactory {
     func createAppCoordinator(navigationController: UINavigationController) -> AppCoordinator {
         AppCoordinator(navigationController: navigationController)
     }
-    
-    
 }
