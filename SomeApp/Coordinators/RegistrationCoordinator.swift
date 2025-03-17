@@ -59,8 +59,7 @@ class RegistrationCoordinator: Coordinator {
         controller.completionHandler = { [weak self] value in
             self?.userData.birthday = value
             print(self?.userData ?? "self is nil")
-            self?.start()
-            // go to main
+            self?.flowCompletionHandler?()
         }
         navigationController.pushViewController(controller, animated: true)
     }

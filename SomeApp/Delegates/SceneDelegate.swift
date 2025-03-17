@@ -3,7 +3,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let registrationCoordinator = CoordinatorFactory().createRegistrationCoordinator(navigationController: UINavigationController())
+    let appCoordinator = CoordinatorFactory().createAppCoordinator(navigationController: UINavigationController())
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -14,9 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window!.makeKeyAndVisible()
-        window!.rootViewController = registrationCoordinator.navigationController
+        window!.rootViewController = appCoordinator.navigationController
         
-        registrationCoordinator.start()
+        appCoordinator.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
