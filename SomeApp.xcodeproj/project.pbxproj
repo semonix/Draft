@@ -9,21 +9,10 @@
 /* Begin PBXBuildFile section */
 		703308172D84A33800500880 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033080A2D84A33800500880 /* AppDelegate.swift */; };
 		703308182D84A33800500880 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033080F2D84A33800500880 /* SceneDelegate.swift */; };
-		703308192D84A33800500880 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308102D84A33800500880 /* UserData.swift */; };
-		7033081A2D84A33800500880 /* ConformPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308122D84A33800500880 /* ConformPhoneViewController.swift */; };
-		7033081B2D84A33800500880 /* EnterPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308132D84A33800500880 /* EnterPasswordViewController.swift */; };
-		7033081C2D84A33800500880 /* EnterPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308142D84A33800500880 /* EnterPhoneViewController.swift */; };
 		7033081D2D84A33800500880 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7033080B2D84A33800500880 /* Assets.xcassets */; };
 		7033081F2D84A33800500880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7033080E2D84A33800500880 /* LaunchScreen.storyboard */; };
-		703308262D84A63A00500880 /* EnterNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308252D84A63A00500880 /* EnterNameViewController.swift */; };
-		703308282D84A74D00500880 /* EnterBirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308272D84A74D00500880 /* EnterBirthdayViewController.swift */; };
-		7033082B2D858CCD00500880 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033082A2D858CCD00500880 /* Protocols.swift */; };
-		7033082E2D858F4800500880 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7033082D2D858F4800500880 /* RegistrationCoordinator.swift */; };
-		703308312D8590AE00500880 /* ModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308302D8590AE00500880 /* ModuleFactory.swift */; };
-		703308332D85DBA600500880 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308322D85DBA600500880 /* CoordinatorFactory.swift */; };
-		703308352D85E0BB00500880 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703308342D85E0BB00500880 /* AppCoordinator.swift */; };
 		706395BD2D83587900A98193 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 706395BC2D83587900A98193 /* SnapKit */; };
-		70F24F372D884CDA00F0FF08 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F24F362D884CDA00F0FF08 /* MainViewController.swift */; };
+		70EDE8672D8AF980009A8E0B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EDE8662D8AF980009A8E0B /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,18 +22,7 @@
 		7033080C2D84A33800500880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7033080D2D84A33800500880 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7033080F2D84A33800500880 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		703308102D84A33800500880 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		703308122D84A33800500880 /* ConformPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConformPhoneViewController.swift; sourceTree = "<group>"; };
-		703308132D84A33800500880 /* EnterPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPasswordViewController.swift; sourceTree = "<group>"; };
-		703308142D84A33800500880 /* EnterPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneViewController.swift; sourceTree = "<group>"; };
-		703308252D84A63A00500880 /* EnterNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNameViewController.swift; sourceTree = "<group>"; };
-		703308272D84A74D00500880 /* EnterBirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterBirthdayViewController.swift; sourceTree = "<group>"; };
-		7033082A2D858CCD00500880 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		7033082D2D858F4800500880 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
-		703308302D8590AE00500880 /* ModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleFactory.swift; sourceTree = "<group>"; };
-		703308322D85DBA600500880 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
-		703308342D85E0BB00500880 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		70F24F362D884CDA00F0FF08 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		70EDE8662D8AF980009A8E0B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +59,6 @@
 				7033080B2D84A33800500880 /* Assets.xcassets */,
 				7033080C2D84A33800500880 /* Info.plist */,
 				7033080E2D84A33800500880 /* LaunchScreen.storyboard */,
-				703308102D84A33800500880 /* UserData.swift */,
 			);
 			path = others;
 			sourceTree = "<group>";
@@ -89,12 +66,7 @@
 		703308152D84A33800500880 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				703308142D84A33800500880 /* EnterPhoneViewController.swift */,
-				703308122D84A33800500880 /* ConformPhoneViewController.swift */,
-				703308132D84A33800500880 /* EnterPasswordViewController.swift */,
-				703308252D84A63A00500880 /* EnterNameViewController.swift */,
-				703308272D84A74D00500880 /* EnterBirthdayViewController.swift */,
-				70F24F362D884CDA00F0FF08 /* MainViewController.swift */,
+				70EDE8662D8AF980009A8E0B /* ViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -103,55 +75,10 @@
 			isa = PBXGroup;
 			children = (
 				703308362D85E1A800500880 /* Delegates */,
-				7033082F2D85908B00500880 /* Factories */,
-				7033082C2D858F0600500880 /* Coordinators */,
 				703308152D84A33800500880 /* ViewControllers */,
-				703308222D84A40B00500880 /* Model */,
-				703308212D84A40200500880 /* AppDelegate */,
-				703308202D84A3EE00500880 /* Resourses */,
 				703308112D84A33800500880 /* others */,
 			);
 			path = SomeApp;
-			sourceTree = "<group>";
-		};
-		703308202D84A3EE00500880 /* Resourses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resourses;
-			sourceTree = "<group>";
-		};
-		703308212D84A40200500880 /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AppDelegate;
-			sourceTree = "<group>";
-		};
-		703308222D84A40B00500880 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		7033082C2D858F0600500880 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				7033082A2D858CCD00500880 /* Protocols.swift */,
-				7033082D2D858F4800500880 /* RegistrationCoordinator.swift */,
-				703308342D85E0BB00500880 /* AppCoordinator.swift */,
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		7033082F2D85908B00500880 /* Factories */ = {
-			isa = PBXGroup;
-			children = (
-				703308302D8590AE00500880 /* ModuleFactory.swift */,
-				703308322D85DBA600500880 /* CoordinatorFactory.swift */,
-			);
-			path = Factories;
 			sourceTree = "<group>";
 		};
 		703308362D85E1A800500880 /* Delegates */ = {
@@ -240,20 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70EDE8672D8AF980009A8E0B /* ViewController.swift in Sources */,
 				703308172D84A33800500880 /* AppDelegate.swift in Sources */,
 				703308182D84A33800500880 /* SceneDelegate.swift in Sources */,
-				703308352D85E0BB00500880 /* AppCoordinator.swift in Sources */,
-				703308192D84A33800500880 /* UserData.swift in Sources */,
-				703308332D85DBA600500880 /* CoordinatorFactory.swift in Sources */,
-				7033082E2D858F4800500880 /* RegistrationCoordinator.swift in Sources */,
-				703308262D84A63A00500880 /* EnterNameViewController.swift in Sources */,
-				70F24F372D884CDA00F0FF08 /* MainViewController.swift in Sources */,
-				703308312D8590AE00500880 /* ModuleFactory.swift in Sources */,
-				7033081A2D84A33800500880 /* ConformPhoneViewController.swift in Sources */,
-				7033081B2D84A33800500880 /* EnterPasswordViewController.swift in Sources */,
-				7033081C2D84A33800500880 /* EnterPhoneViewController.swift in Sources */,
-				703308282D84A74D00500880 /* EnterBirthdayViewController.swift in Sources */,
-				7033082B2D858CCD00500880 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
