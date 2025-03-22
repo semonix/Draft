@@ -3,7 +3,7 @@ import SnapKit
 
 class ViewController: UIViewController {
     
-    var shouldPrintToConsole = true
+    var shouldPrintToConsole = false
     // UI элементы
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         // Создаем основной view контроллера
         view = UIView()
         view.backgroundColor = .systemMint
+        
         if shouldPrintToConsole {
             print(#function)
         }
