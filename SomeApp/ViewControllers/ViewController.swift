@@ -323,3 +323,8 @@ class ViewController: UIViewController {
         // Удаление неиспользуемых контроллеров
     }
 }
+@available(iOS 17.0, *)
+#Preview {
+    UINavigationController(rootViewController: ViewController())
+//    ViewController()
+}
