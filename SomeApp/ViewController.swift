@@ -7,19 +7,6 @@ class FoodController: UICollectionViewController {
     private let backgroundColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1)
     private let firstSectionColorPartOne = UIColor(red: 255.0/255.0, green: 27.0/255.0, blue: 9.0/255.0, alpha: 1)
     private let firstSectionColorPartTwo = UIColor(red: 236.0/255.0, green: 236.0/255.0, blue: 228.0/255.0, alpha: 1)
-    
-    private lazy var gradientLayerForFirstSection: CAGradientLayer = {
-        let gradientLayer = CAGradientLayer()
-        
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradientLayer.endPoint   = CGPoint(x: 1.0, y: 0.0)
-        gradientLayer.colors = [firstSectionColorPartOne.cgColor,
-                                firstSectionColorPartOne.cgColor,
-                                firstSectionColorPartTwo.cgColor,
-                                firstSectionColorPartTwo.cgColor]
-        
-        return gradientLayer
-    }()
     private lazy var gradientLayerForVCofFirstSection: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
         
@@ -29,10 +16,8 @@ class FoodController: UICollectionViewController {
                                 firstSectionColorPartOne.cgColor,
                                 firstSectionColorPartTwo.cgColor,
                                 firstSectionColorPartTwo.cgColor]
-        
         return gradientLayer
     }()
-
     
     private let secondSectionColor = UIColor.white
     private let thirdSectionColor = UIColor(red: 249.0/255.0, green: 211.0/255.0, blue: 142.0/255.0, alpha: 1)
@@ -149,12 +134,21 @@ class FoodController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         /// Извлекаем переиспользуемую ячейку по заранее зарегистрированному идентификатору
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        cell.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        
         switch indexPath.section {
         case 0:
-
+            let gradientLayerForFirstSection = CAGradientLayer()
+                
+            gradientLayerForFirstSection.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayerForFirstSection.endPoint   = CGPoint(x: 1.0, y: 0.0)
+            gradientLayerForFirstSection.colors = [firstSectionColorPartOne.cgColor,
+                                        firstSectionColorPartOne.cgColor,
+                                        firstSectionColorPartTwo.cgColor,
+                                        firstSectionColorPartTwo.cgColor]
             gradientLayerForFirstSection.frame = cell.bounds
+            /// .insertSublayer(..., at: 0) - чтобы градиент оказался под другими элементами
             cell.layer.insertSublayer(gradientLayerForFirstSection, at: 0)
-            
         case 1:
             cell.backgroundColor = secondSectionColor
         case 2:
