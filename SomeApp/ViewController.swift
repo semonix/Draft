@@ -1,8 +1,25 @@
 import UIKit
 import SnapKit
+// MARK: - FOODCELL
+class FoodCell: UICollectionViewCell {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        // Очищаем слои при переиспользовании
+        layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        backgroundColor = nil
+    }
 
+    func applyGradient(_ colors: [CGColor], frame: CGRect) {
+        let gradient = CAGradientLayer()
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+        gradient.colors = colors
+        gradient.frame = frame
+        layer.insertSublayer(gradient, at: 0)
+    }
+}
+// MARK: - FOODCONTROLLER
 class FoodController: UICollectionViewController {
-    
     
     private let backgroundColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1)
     private let firstSectionColorPartOne = UIColor(red: 255.0/255.0, green: 27.0/255.0, blue: 9.0/255.0, alpha: 1)
@@ -18,7 +35,6 @@ class FoodController: UICollectionViewController {
                                 firstSectionColorPartTwo.cgColor]
         return gradientLayer
     }()
-    
     private let secondSectionColor = UIColor.white
     private let thirdSectionColor = UIColor(red: 249.0/255.0, green: 211.0/255.0, blue: 142.0/255.0, alpha: 1)
     private let fourthSectionColor = UIColor.white
@@ -133,22 +149,16 @@ class FoodController: UICollectionViewController {
     /// Возвращает готовую ячейку для отображения на экране
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         /// Извлекаем переиспользуемую ячейку по заранее зарегистрированному идентификатору
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        cell.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FoodCell
+
         switch indexPath.section {
         case 0:
-            let gradientLayerForFirstSection = CAGradientLayer()
-                
-            gradientLayerForFirstSection.startPoint = CGPoint(x: 0.0, y: 0.0)
-            gradientLayerForFirstSection.endPoint   = CGPoint(x: 1.0, y: 0.0)
-            gradientLayerForFirstSection.colors = [firstSectionColorPartOne.cgColor,
-                                        firstSectionColorPartOne.cgColor,
-                                        firstSectionColorPartTwo.cgColor,
-                                        firstSectionColorPartTwo.cgColor]
-            gradientLayerForFirstSection.frame = cell.bounds
-            /// .insertSublayer(..., at: 0) - чтобы градиент оказался под другими элементами
-            cell.layer.insertSublayer(gradientLayerForFirstSection, at: 0)
+            cell.applyGradient([
+                firstSectionColorPartOne.cgColor,
+                firstSectionColorPartOne.cgColor,
+                firstSectionColorPartTwo.cgColor,
+                firstSectionColorPartTwo.cgColor
+            ], frame: cell.bounds)
         case 1:
             cell.backgroundColor = secondSectionColor
         case 2:
@@ -158,7 +168,6 @@ class FoodController: UICollectionViewController {
         default:
             cell.backgroundColor = .black
         }
-//        cell.backgroundColor = .red
         return cell
     }
     override func viewDidLoad() {
@@ -166,7 +175,7 @@ class FoodController: UICollectionViewController {
         collectionView.backgroundColor = backgroundColor
         navigationItem.title = "Food Delivery"
         /// Регистрируем тип ячейки для возможности её переиспользования
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(FoodCell.self, forCellWithReuseIdentifier: cellId)
         /// Регистрируем тип заголовка для возможности его переиспользования
         collectionView.register(Header.self, forSupplementaryViewOfKind: Self.categoryHeaderId, withReuseIdentifier: headerId)
     }
