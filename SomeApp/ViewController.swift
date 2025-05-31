@@ -1,20 +1,66 @@
 import UIKit
 import SnapKit
+
 // MARK: - FOODCELL
 class FoodCell: UICollectionViewCell {
+    
+    private let imageView = UIImageView()
+    private let label = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+        setupLayout()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func prepareForReuse() {
         super.prepareForReuse()
         // Очищаем слои при переиспользовании
+        imageView.image = nil
+        label.text = nil
         layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
         backgroundColor = nil
     }
-
+    func configure(image: UIImage?, text: String) {
+        imageView.image = image
+        label.text = text
+    }
+    private func setupViews() {
+        contentView.layer.cornerRadius = 12
+        contentView.layer.masksToBounds = true
+//        contentView.backgroundColor = .white
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.numberOfLines = 2
+        
+        contentView.addSubview(imageView)
+        contentView.addSubview(label)
+    }
+    private func setupLayout() {
+        imageView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(contentView.snp.height).dividedBy(2)
+        }
+        label.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(8)
+            make.left.right.equalToSuperview().inset(4)
+            make.bottom.lessThanOrEqualToSuperview().inset(8)
+        }
+        
+    }
     func applyGradient(_ colors: [CGColor], frame: CGRect) {
         let gradient = CAGradientLayer()
         gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradient.colors = colors
         gradient.frame = frame
+        gradient.cornerRadius = 12
         layer.insertSublayer(gradient, at: 0)
     }
 }
@@ -151,6 +197,8 @@ class FoodController: UICollectionViewController {
         /// Извлекаем переиспользуемую ячейку по заранее зарегистрированному идентификатору
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FoodCell
 
+        cell.configure(image: UIImage(systemName: "face.smiling"), text: "some text")
+        
         switch indexPath.section {
         case 0:
             cell.applyGradient([
@@ -160,13 +208,13 @@ class FoodController: UICollectionViewController {
                 firstSectionColorPartTwo.cgColor
             ], frame: cell.bounds)
         case 1:
-            cell.backgroundColor = secondSectionColor
+            cell.contentView.backgroundColor = secondSectionColor
         case 2:
-            cell.backgroundColor = thirdSectionColor
+            cell.contentView.backgroundColor = thirdSectionColor
         case 3:
-            cell.backgroundColor = fourthSectionColor
+            cell.contentView.backgroundColor = fourthSectionColor
         default:
-            cell.backgroundColor = .black
+            cell.contentView.backgroundColor = .black
         }
         return cell
     }
