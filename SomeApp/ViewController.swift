@@ -1,25 +1,75 @@
 import UIKit
 import SnapKit
 
-class FoodController: UICollectionViewController {
+// MARK: - FOODCELL
+class FoodCell: UICollectionViewCell {
     
+    private let imageView = UIImageView()
+    private let label = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+        setupLayout()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        // Очищаем слои при переиспользовании
+        imageView.image = nil
+        label.text = nil
+        layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        backgroundColor = nil
+    }
+    func configure(image: UIImage?, text: String) {
+        imageView.image = image
+        label.text = text
+    }
+    private func setupViews() {
+        contentView.layer.cornerRadius = 12
+        contentView.layer.masksToBounds = true
+//        contentView.backgroundColor = .white
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.numberOfLines = 2
+        
+        contentView.addSubview(imageView)
+        contentView.addSubview(label)
+    }
+    private func setupLayout() {
+        imageView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(contentView.snp.height).dividedBy(2)
+        }
+        label.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(8)
+            make.left.right.equalToSuperview().inset(4)
+            make.bottom.lessThanOrEqualToSuperview().inset(8)
+        }
+        
+    }
+    func applyGradient(_ colors: [CGColor], frame: CGRect) {
+        let gradient = CAGradientLayer()
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
+        gradient.colors = colors
+        gradient.frame = frame
+        gradient.cornerRadius = 12
+        layer.insertSublayer(gradient, at: 0)
+    }
+}
+// MARK: - FOODCONTROLLER
+class FoodController: UICollectionViewController {
     
     private let backgroundColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1)
     private let firstSectionColorPartOne = UIColor(red: 255.0/255.0, green: 27.0/255.0, blue: 9.0/255.0, alpha: 1)
     private let firstSectionColorPartTwo = UIColor(red: 236.0/255.0, green: 236.0/255.0, blue: 228.0/255.0, alpha: 1)
-    
-    private lazy var gradientLayerForFirstSection: CAGradientLayer = {
-        let gradientLayer = CAGradientLayer()
-        
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradientLayer.endPoint   = CGPoint(x: 1.0, y: 0.0)
-        gradientLayer.colors = [firstSectionColorPartOne.cgColor,
-                                firstSectionColorPartOne.cgColor,
-                                firstSectionColorPartTwo.cgColor,
-                                firstSectionColorPartTwo.cgColor]
-        
-        return gradientLayer
-    }()
     private lazy var gradientLayerForVCofFirstSection: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
         
@@ -29,11 +79,8 @@ class FoodController: UICollectionViewController {
                                 firstSectionColorPartOne.cgColor,
                                 firstSectionColorPartTwo.cgColor,
                                 firstSectionColorPartTwo.cgColor]
-        
         return gradientLayer
     }()
-
-    
     private let secondSectionColor = UIColor.white
     private let thirdSectionColor = UIColor(red: 249.0/255.0, green: 211.0/255.0, blue: 142.0/255.0, alpha: 1)
     private let fourthSectionColor = UIColor.white
@@ -148,23 +195,27 @@ class FoodController: UICollectionViewController {
     /// Возвращает готовую ячейку для отображения на экране
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         /// Извлекаем переиспользуемую ячейку по заранее зарегистрированному идентификатору
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FoodCell
+
+        cell.configure(image: UIImage(systemName: "face.smiling"), text: "some text")
+        
         switch indexPath.section {
         case 0:
-
-            gradientLayerForFirstSection.frame = cell.bounds
-            cell.layer.insertSublayer(gradientLayerForFirstSection, at: 0)
-            
+            cell.applyGradient([
+                firstSectionColorPartOne.cgColor,
+                firstSectionColorPartOne.cgColor,
+                firstSectionColorPartTwo.cgColor,
+                firstSectionColorPartTwo.cgColor
+            ], frame: cell.bounds)
         case 1:
-            cell.backgroundColor = secondSectionColor
+            cell.contentView.backgroundColor = secondSectionColor
         case 2:
-            cell.backgroundColor = thirdSectionColor
+            cell.contentView.backgroundColor = thirdSectionColor
         case 3:
-            cell.backgroundColor = fourthSectionColor
+            cell.contentView.backgroundColor = fourthSectionColor
         default:
-            cell.backgroundColor = .black
+            cell.contentView.backgroundColor = .black
         }
-//        cell.backgroundColor = .red
         return cell
     }
     override func viewDidLoad() {
@@ -172,7 +223,7 @@ class FoodController: UICollectionViewController {
         collectionView.backgroundColor = backgroundColor
         navigationItem.title = "Food Delivery"
         /// Регистрируем тип ячейки для возможности её переиспользования
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(FoodCell.self, forCellWithReuseIdentifier: cellId)
         /// Регистрируем тип заголовка для возможности его переиспользования
         collectionView.register(Header.self, forSupplementaryViewOfKind: Self.categoryHeaderId, withReuseIdentifier: headerId)
     }
