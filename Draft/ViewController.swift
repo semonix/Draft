@@ -20,7 +20,7 @@ class FoodCell: UICollectionViewCell {
         // Очищаем слои при переиспользовании
         imageView.image = nil
         label.text = nil
-        layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        contentView.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
         backgroundColor = nil
     }
     func configure(image: UIImage?, text: String) {
@@ -61,7 +61,7 @@ class FoodCell: UICollectionViewCell {
         gradient.colors = colors
         gradient.frame = frame
         gradient.cornerRadius = 12
-        layer.insertSublayer(gradient, at: 0)
+        contentView.layer.insertSublayer(gradient, at: 0)
     }
 }
 // MARK: - FOODCONTROLLER
