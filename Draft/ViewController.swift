@@ -20,7 +20,7 @@ class FoodCell: UICollectionViewCell {
         // Очищаем слои при переиспользовании
         imageView.image = nil
         label.text = nil
-        layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        contentView.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
         backgroundColor = nil
     }
     func configure(image: UIImage?, text: String) {
@@ -61,11 +61,19 @@ class FoodCell: UICollectionViewCell {
         gradient.colors = colors
         gradient.frame = frame
         gradient.cornerRadius = 12
-        layer.insertSublayer(gradient, at: 0)
+        contentView.layer.insertSublayer(gradient, at: 0)
     }
 }
 // MARK: - FOODCONTROLLER
-class FoodController: UICollectionViewController {
+class FoodController: UIViewController {
+    
+    private lazy var collectionView: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: Self.createLayout())
+        cv.backgroundColor = backgroundColor
+        cv.delegate = self
+        cv.dataSource = self
+        return cv
+    }()
     
     private let backgroundColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1)
     private let firstSectionColorPartOne = UIColor(red: 255.0/255.0, green: 27.0/255.0, blue: 9.0/255.0, alpha: 1)
@@ -91,7 +99,8 @@ class FoodController: UICollectionViewController {
     // MARK: - LAYOUT
     /// Создаём layout (расположение ячеек) и передаём его в родительский класс
     init() {
-        super.init(collectionViewLayout: Self.createLayout())
+//        super.init(collectionViewLayout: Self.createLayout())
+        super.init(nibName: nil, bundle: nil)
     }
     private static func createLayout() -> UICollectionViewCompositionalLayout {
 
@@ -167,22 +176,41 @@ class FoodController: UICollectionViewController {
             }
         }
     }
-    // MARK: - HEADERS AND COUNT
     
-    /// HEADERS
-    /// Указываем, какой индентификатор использовать для заголовка
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
-//        header.backgroundColor = .systemBlue
-        return header
+
+
+    // MARK: - VIEWDIDLOAD
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        collectionView.backgroundColor = backgroundColor
+        
+        navigationItem.title = "Food Delivery"
+        setupCollectionView()
     }
-    /// COUNT
+    func setupCollectionView() {
+        view.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        /// Регистрируем тип ячейки для возможности её переиспользования
+        collectionView.register(FoodCell.self, forCellWithReuseIdentifier: cellId)
+        /// Регистрируем тип заголовка для возможности его переиспользования
+        collectionView.register(Header.self, forSupplementaryViewOfKind: Self.categoryHeaderId, withReuseIdentifier: headerId)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+// MARK: - DELEGATE DATASOURCE
+extension FoodController: UICollectionViewDataSource {
+    // MARK: - COUNT
     /// Количество секций
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         4
     }
-    /// Количество ячеек в секции
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    /// Количество элементов в каждой секции
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0: 3
         case 1: 8
@@ -193,7 +221,7 @@ class FoodController: UICollectionViewController {
     }
     // MARK: - CELL APPEARANCE
     /// Возвращает готовую ячейку для отображения на экране
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         /// Извлекаем переиспользуемую ячейку по заранее зарегистрированному идентификатору
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FoodCell
 
@@ -218,20 +246,17 @@ class FoodController: UICollectionViewController {
         }
         return cell
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        collectionView.backgroundColor = backgroundColor
-        navigationItem.title = "Food Delivery"
-        /// Регистрируем тип ячейки для возможности её переиспользования
-        collectionView.register(FoodCell.self, forCellWithReuseIdentifier: cellId)
-        /// Регистрируем тип заголовка для возможности его переиспользования
-        collectionView.register(Header.self, forSupplementaryViewOfKind: Self.categoryHeaderId, withReuseIdentifier: headerId)
+    // MARK: - HEADERS
+    /// Указываем, какой индентификатор использовать для заголовка
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+//        header.backgroundColor = .systemBlue
+        return header
     }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    // MARK: - ACTION
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+}
+// MARK: - DELEGATE (ACTION)
+extension FoodController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = indexPath.item
         let section = indexPath.section
         print("item: \(item), section: \(section)")
