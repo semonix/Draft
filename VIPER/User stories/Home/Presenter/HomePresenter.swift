@@ -1,5 +1,20 @@
 import Foundation
-
+// MARK: - PROTOCOLS
+protocol HomeViewInput: AnyObject {
+    func set(state: HomeViewState)
+}
+protocol HomeViewOutput: AnyObject {
+    func viewDidLoad()
+}
+protocol HomeView: HomeViewInput, TransitionHandler {
+    var output: HomeViewOutput! { get set }
+}
+enum HomeViewState {
+    case data
+    case refundSuccess
+    case refundFailed(_ error: String)
+}
+// MARK: - HOMEPRESENTER
 final class HomePresenter {
     
     unowned var view: HomeViewInput
@@ -15,7 +30,7 @@ final class HomePresenter {
         self.router = router
     }
 }
-// MARK: - HomeViewOutput
+// MARK: - HomeViewOutPut
 extension HomePresenter: HomeViewOutput {
     func viewDidLoad() {
         interactor.obtainData(1)
@@ -25,14 +40,15 @@ extension HomePresenter: HomeViewOutput {
         print("Hello Presenter with viewDidload")
     }
 }
+// MARK: - HomeInteractorOutput
 extension HomePresenter: HomeInteractorOutput {
+    
     func setSuccessfulObtainData() {
-        <#code#>
+        print("Hello Presenter with setSuccessfulObtainData")
+        view.set(state: .data)
     }
-    
-    func setFailedObtainData(for: String) {
-        <#code#>
+    func setFailedObtainData(for error: String) {
+        print("Hello Presenter with setFairledObtainData")
+        view.set(state: .refundFailed(error))
     }
-    
-    
 }
