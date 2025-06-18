@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  SomeApp
-//
-//  Created by Даниял on 28.01.2025.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -21,7 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window!.makeKeyAndVisible()
-        window!.rootViewController = UINavigationController(rootViewController: FoodController())
+        
+        let userRouter = UserRouter.start()
+        let userViewController = userRouter.entry as! UIViewController
+        window!.rootViewController = UINavigationController(rootViewController: userViewController)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
