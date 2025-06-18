@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  SomeApp
-//
-//  Created by Даниял on 28.01.2025.
-//
-
 import UIKit
 
 @main
