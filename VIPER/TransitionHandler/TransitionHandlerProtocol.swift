@@ -1,5 +1,5 @@
-import Foundation
+import UIKit
 
-protocol TransitionHandler {
-    
+protocol TransitionHandler: AnyObject {
+    func presentModule(with: UIViewController, animated: Bool) -> DetailedScreenModuleInput
 }
