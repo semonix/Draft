@@ -6,7 +6,7 @@ import SnapKit
 // protocol
 // reference to presenter
 
-protocol AnyView {
+protocol AnyView: AnyObject {
     
     var presenter: AnyPresenter? { get set }
     
@@ -65,6 +65,14 @@ class UserViewController: UIViewController, AnyView {
             self.label.text = error
             self.label.isHidden = false
         }
+        print(1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print(2)
+            self.presenter?.switchToAnotherScreen()
+        }
+    }
+    deinit {
+        print("View deinitialized")
     }
 }
 extension UserViewController: UITableViewDataSource, UITableViewDelegate {
