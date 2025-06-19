@@ -8,15 +8,13 @@ import Foundation
 
 protocol AnyInteractor {
     var presenter: AnyPresenter? { get set }
-    
     func getUsers()
 }
-
 class UserInteractor: AnyInteractor {
-    var presenter: AnyPresenter?
+    weak var presenter: AnyPresenter?
     
     func getUsers() {
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { return }
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users!") else { return }
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             guard let data = data, error == nil else {
                 self?.presenter?.interactorDidFetchUsers(with: .failure(.failed))
@@ -30,6 +28,8 @@ class UserInteractor: AnyInteractor {
                 self?.presenter?.interactorDidFetchUsers(with: .failure(.failed))
             }
         }.resume()
-        
+    }
+    deinit {
+        print("Interactor deinitialized")
     }
 }
