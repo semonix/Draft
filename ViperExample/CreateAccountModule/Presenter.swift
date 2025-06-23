@@ -1,10 +1,10 @@
 import UIKit
+
 protocol PresenterInput {
     var output: PresenterOutput { get }
-    
 }
 protocol PresenterOutput {
-    
+    var navigationController: UINavigationController? { get }
 }
 protocol ViewInput: AnyObject {
     var presenter: ViewOutput? { get }
@@ -29,16 +29,18 @@ class Presenter {
         self.view = view
     }
 }
+// MARK: - FROM VIEW
 extension Presenter: ViewOutput {
     func userSelectCreateAccount(withLogin login: String, password: String) {
         interactor.createAccount(withLogin: login, password: password)
     }
 }
+// MARK: - FROM INTERACTOR
 extension Presenter: InteractorOutput {
     func didReceive(error: String) {
         view?.showError(error)
     }
-    func didCreateAccound(withLogin login: String) {
+    func didCreateAccount(withLogin login: String) {
         router.openAuthScreen(withLogin: login)
     }
 }
