@@ -13,6 +13,7 @@
 		B7168EA72E02E9EC00566E1A /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7168EA62E02E9EC00566E1A /* Interactor.swift */; };
 		B7168EA92E02E9FD00566E1A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7168EA82E02E9FD00566E1A /* Router.swift */; };
 		B7168EAB2E02EA0600566E1A /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7168EAA2E02EA0600566E1A /* Entity.swift */; };
+		B72D6E522E05DE9000650111 /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72D6E512E05DE9000650111 /* Assembly.swift */; };
 		B7B796512E01A37B00F45FD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B796452E01A37B00F45FD1 /* AppDelegate.swift */; };
 		B7B796522E01A37B00F45FD1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B796482E01A37B00F45FD1 /* SceneDelegate.swift */; };
 		B7B796542E01A37B00F45FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7B796462E01A37B00F45FD1 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		B7168EA62E02E9EC00566E1A /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		B7168EA82E02E9FD00566E1A /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B7168EAA2E02EA0600566E1A /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		B72D6E512E05DE9000650111 /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
 		B7B796452E01A37B00F45FD1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7B796462E01A37B00F45FD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7B796472E01A37B00F45FD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,7 +50,7 @@
 		700F39D72D492DB700716263 = {
 			isa = PBXGroup;
 			children = (
-				B7B796502E01A37B00F45FD1 /* VIPER */,
+				B7B796502E01A37B00F45FD1 /* ViperExample */,
 				700F39E12D492DB700716263 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,7 +63,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B7AC3B112E02E7F700DA4E54 /* VIPER */ = {
+		B7AC3B112E02E7F700DA4E54 /* CreateAccountModule */ = {
 			isa = PBXGroup;
 			children = (
 				B7168EA22E02E9A600566E1A /* View.swift */,
@@ -69,8 +71,9 @@
 				B7168EA62E02E9EC00566E1A /* Interactor.swift */,
 				B7168EA82E02E9FD00566E1A /* Router.swift */,
 				B7168EAA2E02EA0600566E1A /* Entity.swift */,
+				B72D6E512E05DE9000650111 /* Assembly.swift */,
 			);
-			path = VIPER;
+			path = CreateAccountModule;
 			sourceTree = "<group>";
 		};
 		B7B796492E01A37B00F45FD1 /* Resources */ = {
@@ -92,14 +95,14 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		B7B796502E01A37B00F45FD1 /* VIPER */ = {
+		B7B796502E01A37B00F45FD1 /* ViperExample */ = {
 			isa = PBXGroup;
 			children = (
-				B7AC3B112E02E7F700DA4E54 /* VIPER */,
+				B7AC3B112E02E7F700DA4E54 /* CreateAccountModule */,
 				B7B7964C2E01A37B00F45FD1 /* Storyboards */,
 				B7B796492E01A37B00F45FD1 /* Resources */,
 			);
-			path = VIPER;
+			path = ViperExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7B796512E01A37B00F45FD1 /* AppDelegate.swift in Sources */,
+				B72D6E522E05DE9000650111 /* Assembly.swift in Sources */,
 				B7B796522E01A37B00F45FD1 /* SceneDelegate.swift in Sources */,
 				B7168EAB2E02EA0600566E1A /* Entity.swift in Sources */,
 				B7168EA72E02E9EC00566E1A /* Interactor.swift in Sources */,
@@ -211,7 +215,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VIPER/Resources/Info.plist;
+				INFOPLIST_FILE = ViperExample/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -238,7 +242,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VIPER/Resources/Info.plist;
+				INFOPLIST_FILE = ViperExample/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
